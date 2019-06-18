@@ -1,0 +1,231 @@
+INFO:tensorflow:Creating model directory model/run/
+INFO:tensorflow:Using parameters:
+data:
+  eval_features_file: ./training_sets/eval/src-val.txt
+  eval_labels_file: ./training_sets/eval/tgt-val.txt
+  source_words_vocabulary: ./vocab/vocab.txt
+  target_words_vocabulary: ./vocab/vocab.txt
+  train_features_file: ./training_sets/train/src-train.txt
+  train_labels_file: ./training_sets/train/tgt-train.txt
+eval:
+  batch_size: 32
+  eval_delay: 18000
+  exporters: last
+infer:
+  batch_size: 32
+  bucket_width: 5
+model_dir: model/run/
+params:
+  average_loss_in_time: true
+  beam_width: 4
+  decay_params:
+    model_dim: 512
+    warmup_steps: 8000
+  decay_type: noam_decay_v2
+  label_smoothing: 0.1
+  learning_rate: 2.0
+  length_penalty: 0.6
+  optimizer: LazyAdamOptimizer
+  optimizer_params:
+    beta1: 0.9
+    beta2: 0.998
+score:
+  batch_size: 64
+train:
+  average_last_checkpoints: 8
+  batch_size: 3072
+  batch_type: tokens
+  bucket_width: 1
+  effective_batch_size: 25000
+  keep_checkpoint_max: 8
+  maximum_features_length: 100
+  maximum_labels_length: 100
+  sample_buffer_size: -1
+  save_summary_steps: 100
+  train_steps: 500000
+
+INFO:tensorflow:Accumulate gradients of 9 iterations to reach effective batch size of 25000
+2019-04-25 17:43:55.958718: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 3467610000 Hz
+2019-04-25 17:43:55.958945: I tensorflow/compiler/xla/service/service.cc:150] XLA service 0x4a756b0 executing computations on platform Host. Devices:
+2019-04-25 17:43:55.958970: I tensorflow/compiler/xla/service/service.cc:158]   StreamExecutor device (0): <undefined>, <undefined>
+INFO:tensorflow:Using config: {'_model_dir': 'model/run/', '_tf_random_seed': None, '_save_summary_steps': 100, '_save_checkpoints_steps': None, '_save_checkpoints_secs': 600, '_session_config': gpu_options {
+}
+allow_soft_placement: true
+graph_options {
+  rewrite_options {
+    layout_optimizer: OFF
+  }
+}
+, '_keep_checkpoint_max': 8, '_keep_checkpoint_every_n_hours': 10000, '_log_step_count_steps': 900, '_train_distribute': None, '_device_fn': None, '_protocol': None, '_eval_distribute': None, '_experimental_distribute': None, '_service': None, '_cluster_spec': <tensorflow.python.training.server_lib.ClusterSpec object at 0x7f32e54ddd68>, '_task_type': 'worker', '_task_id': 0, '_global_id_in_cluster': 0, '_master': '', '_evaluation_master': '', '_is_chief': True, '_num_ps_replicas': 0, '_num_worker_replicas': 1}
+INFO:tensorflow:Not using Distribute Coordinator.
+INFO:tensorflow:Running training and evaluation locally (non-distributed).
+INFO:tensorflow:Start train and evaluate loop. The evaluate will happen after every checkpoint. Checkpoint frequency is determined based on RunConfig arguments: save_checkpoints_steps None or save_checkpoints_secs 600.
+WARNING:tensorflow:From /home/gonced8/.local/lib/python3.6/site-packages/tensorflow/python/framework/op_def_library.py:263: colocate_with (from tensorflow.python.framework.ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Colocations handled automatically by placer.
+INFO:tensorflow:Training on 25004 examples
+INFO:tensorflow:Calling model_fn.
+WARNING:tensorflow:From /home/gonced8/.local/lib/python3.6/site-packages/opennmt/encoders/self_attention_encoder.py:59: dropout (from tensorflow.python.layers.core) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use keras.layers.dropout instead.
+WARNING:tensorflow:From /home/gonced8/.local/lib/python3.6/site-packages/tensorflow/python/keras/layers/core.py:143: calling dropout (from tensorflow.python.ops.nn_ops) with keep_prob is deprecated and will be removed in a future version.
+Instructions for updating:
+Please use `rate` instead of `keep_prob`. Rate should be set to `rate = 1 - keep_prob`.
+WARNING:tensorflow:From /home/gonced8/.local/lib/python3.6/site-packages/opennmt/layers/transformer.py:136: conv1d (from tensorflow.python.layers.convolutional) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use keras.layers.conv1d instead.
+WARNING:tensorflow:From /home/gonced8/.local/lib/python3.6/site-packages/tensorflow/python/ops/math_ops.py:3066: to_int32 (from tensorflow.python.ops.math_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use tf.cast instead.
+INFO:tensorflow:Done calling model_fn.
+INFO:tensorflow:Create CheckpointSaverHook.
+INFO:tensorflow:Number of trainable parameters: 59512081
+INFO:tensorflow:Graph was finalized.
+INFO:tensorflow:Running local_init_op.
+2019-04-25 17:44:13.929496: I tensorflow/core/kernels/lookup_util.cc:376] Table trying to initialize from file ./vocab/vocab.txt is already initialized.
+INFO:tensorflow:Done running local_init_op.
+INFO:tensorflow:Saving checkpoints for 0 into model/run/model.ckpt.
+INFO:tensorflow:loss = 9.18293, step = 0
+INFO:tensorflow:Saving checkpoints for 4 into model/run/model.ckpt.
+2019-04-25 17:54:35.153728: W tensorflow/core/framework/op_kernel.cc:1401] OP_REQUIRES failed at save_restore_v2_ops.cc:109 : Not found: model/run/model.ckpt-4_temp_fb82b225c292485e8b7cca4774fb078d; No such file or directory
+
+WARNING: The TensorFlow contrib module will not be included in TensorFlow 2.0.
+For more information, please see:
+  * https://github.com/tensorflow/community/blob/master/rfcs/20180907-contrib-sunset.md
+  * https://github.com/tensorflow/addons
+If you depend on functionality not listed there, please file an issue.
+
+Traceback (most recent call last):
+  File "/home/gonced8/.local/lib/python3.6/site-packages/tensorflow/python/client/session.py", line 1334, in _do_call
+    return fn(*args)
+  File "/home/gonced8/.local/lib/python3.6/site-packages/tensorflow/python/client/session.py", line 1319, in _run_fn
+    options, feed_dict, fetch_list, target_list, run_metadata)
+  File "/home/gonced8/.local/lib/python3.6/site-packages/tensorflow/python/client/session.py", line 1407, in _call_tf_sessionrun
+    run_metadata)
+tensorflow.python.framework.errors_impl.NotFoundError: model/run/model.ckpt-4_temp_fb82b225c292485e8b7cca4774fb078d; No such file or directory
+	 [[{{node save/SaveV2}}]]
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/gonced8/.local/lib/python3.6/site-packages/tensorflow/python/training/saver.py", line 1171, in save
+    {self.saver_def.filename_tensor_name: checkpoint_file})
+  File "/home/gonced8/.local/lib/python3.6/site-packages/tensorflow/python/client/session.py", line 929, in run
+    run_metadata_ptr)
+  File "/home/gonced8/.local/lib/python3.6/site-packages/tensorflow/python/client/session.py", line 1152, in _run
+    feed_dict_tensor, options, run_metadata)
+  File "/home/gonced8/.local/lib/python3.6/site-packages/tensorflow/python/client/session.py", line 1328, in _do_run
+    run_metadata)
+  File "/home/gonced8/.local/lib/python3.6/site-packages/tensorflow/python/client/session.py", line 1348, in _do_call
+    raise type(e)(node_def, op, message)
+tensorflow.python.framework.errors_impl.NotFoundError: model/run/model.ckpt-4_temp_fb82b225c292485e8b7cca4774fb078d; No such file or directory
+	 [[node save/SaveV2 (defined at /home/gonced8/.local/lib/python3.6/site-packages/tensorflow_estimator/python/estimator/estimator.py:1403) ]]
+
+Caused by op 'save/SaveV2', defined at:
+  File "/home/gonced8/.local/bin/onmt-main", line 10, in <module>
+    sys.exit(main())
+  File "/home/gonced8/.local/lib/python3.6/site-packages/opennmt/bin/main.py", line 172, in main
+    runner.train_and_evaluate(checkpoint_path=args.checkpoint_path)
+  File "/home/gonced8/.local/lib/python3.6/site-packages/opennmt/runner.py", line 297, in train_and_evaluate
+    result = tf.estimator.train_and_evaluate(estimator, train_spec, eval_spec)
+  File "/home/gonced8/.local/lib/python3.6/site-packages/tensorflow_estimator/python/estimator/training.py", line 471, in train_and_evaluate
+    return executor.run()
+  File "/home/gonced8/.local/lib/python3.6/site-packages/tensorflow_estimator/python/estimator/training.py", line 611, in run
+    return self.run_local()
+  File "/home/gonced8/.local/lib/python3.6/site-packages/tensorflow_estimator/python/estimator/training.py", line 712, in run_local
+    saving_listeners=saving_listeners)
+  File "/home/gonced8/.local/lib/python3.6/site-packages/tensorflow_estimator/python/estimator/estimator.py", line 358, in train
+    loss = self._train_model(input_fn, hooks, saving_listeners)
+  File "/home/gonced8/.local/lib/python3.6/site-packages/tensorflow_estimator/python/estimator/estimator.py", line 1124, in _train_model
+    return self._train_model_default(input_fn, hooks, saving_listeners)
+  File "/home/gonced8/.local/lib/python3.6/site-packages/tensorflow_estimator/python/estimator/estimator.py", line 1158, in _train_model_default
+    saving_listeners)
+  File "/home/gonced8/.local/lib/python3.6/site-packages/tensorflow_estimator/python/estimator/estimator.py", line 1403, in _train_with_estimator_spec
+    log_step_count_steps=log_step_count_steps) as mon_sess:
+  File "/home/gonced8/.local/lib/python3.6/site-packages/tensorflow/python/training/monitored_session.py", line 508, in MonitoredTrainingSession
+    stop_grace_period_secs=stop_grace_period_secs)
+  File "/home/gonced8/.local/lib/python3.6/site-packages/tensorflow/python/training/monitored_session.py", line 934, in __init__
+    stop_grace_period_secs=stop_grace_period_secs)
+  File "/home/gonced8/.local/lib/python3.6/site-packages/tensorflow/python/training/monitored_session.py", line 648, in __init__
+    self._sess = _RecoverableSession(self._coordinated_creator)
+  File "/home/gonced8/.local/lib/python3.6/site-packages/tensorflow/python/training/monitored_session.py", line 1122, in __init__
+    _WrappedSession.__init__(self, self._create_session())
+  File "/home/gonced8/.local/lib/python3.6/site-packages/tensorflow/python/training/monitored_session.py", line 1127, in _create_session
+    return self._sess_creator.create_session()
+  File "/home/gonced8/.local/lib/python3.6/site-packages/tensorflow/python/training/monitored_session.py", line 805, in create_session
+    self.tf_sess = self._session_creator.create_session()
+  File "/home/gonced8/.local/lib/python3.6/site-packages/tensorflow/python/training/monitored_session.py", line 562, in create_session
+    self._scaffold.finalize()
+  File "/home/gonced8/.local/lib/python3.6/site-packages/tensorflow/python/training/monitored_session.py", line 219, in finalize
+    self._saver.build()
+  File "/home/gonced8/.local/lib/python3.6/site-packages/tensorflow/python/training/saver.py", line 844, in build
+    self._build(self._filename, build_save=True, build_restore=True)
+  File "/home/gonced8/.local/lib/python3.6/site-packages/tensorflow/python/training/saver.py", line 881, in _build
+    build_save=build_save, build_restore=build_restore)
+  File "/home/gonced8/.local/lib/python3.6/site-packages/tensorflow/python/training/saver.py", line 504, in _build_internal
+    save_tensor = self._AddShardedSaveOps(filename_tensor, per_device)
+  File "/home/gonced8/.local/lib/python3.6/site-packages/tensorflow/python/training/saver.py", line 295, in _AddShardedSaveOps
+    return self._AddShardedSaveOpsForV2(filename_tensor, per_device)
+  File "/home/gonced8/.local/lib/python3.6/site-packages/tensorflow/python/training/saver.py", line 269, in _AddShardedSaveOpsForV2
+    sharded_saves.append(self._AddSaveOps(sharded_filename, saveables))
+  File "/home/gonced8/.local/lib/python3.6/site-packages/tensorflow/python/training/saver.py", line 210, in _AddSaveOps
+    save = self.save_op(filename_tensor, saveables)
+  File "/home/gonced8/.local/lib/python3.6/site-packages/tensorflow/python/training/saver.py", line 124, in save_op
+    tensors)
+  File "/home/gonced8/.local/lib/python3.6/site-packages/tensorflow/python/ops/gen_io_ops.py", line 1807, in save_v2
+    name=name)
+  File "/home/gonced8/.local/lib/python3.6/site-packages/tensorflow/python/framework/op_def_library.py", line 788, in _apply_op_helper
+    op_def=op_def)
+  File "/home/gonced8/.local/lib/python3.6/site-packages/tensorflow/python/util/deprecation.py", line 507, in new_func
+    return func(*args, **kwargs)
+  File "/home/gonced8/.local/lib/python3.6/site-packages/tensorflow/python/framework/ops.py", line 3300, in create_op
+    op_def=op_def)
+  File "/home/gonced8/.local/lib/python3.6/site-packages/tensorflow/python/framework/ops.py", line 1801, in __init__
+    self._traceback = tf_stack.extract_stack()
+
+NotFoundError (see above for traceback): model/run/model.ckpt-4_temp_fb82b225c292485e8b7cca4774fb078d; No such file or directory
+	 [[node save/SaveV2 (defined at /home/gonced8/.local/lib/python3.6/site-packages/tensorflow_estimator/python/estimator/estimator.py:1403) ]]
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/gonced8/.local/bin/onmt-main", line 10, in <module>
+    sys.exit(main())
+  File "/home/gonced8/.local/lib/python3.6/site-packages/opennmt/bin/main.py", line 172, in main
+    runner.train_and_evaluate(checkpoint_path=args.checkpoint_path)
+  File "/home/gonced8/.local/lib/python3.6/site-packages/opennmt/runner.py", line 297, in train_and_evaluate
+    result = tf.estimator.train_and_evaluate(estimator, train_spec, eval_spec)
+  File "/home/gonced8/.local/lib/python3.6/site-packages/tensorflow_estimator/python/estimator/training.py", line 471, in train_and_evaluate
+    return executor.run()
+  File "/home/gonced8/.local/lib/python3.6/site-packages/tensorflow_estimator/python/estimator/training.py", line 611, in run
+    return self.run_local()
+  File "/home/gonced8/.local/lib/python3.6/site-packages/tensorflow_estimator/python/estimator/training.py", line 712, in run_local
+    saving_listeners=saving_listeners)
+  File "/home/gonced8/.local/lib/python3.6/site-packages/tensorflow_estimator/python/estimator/estimator.py", line 358, in train
+    loss = self._train_model(input_fn, hooks, saving_listeners)
+  File "/home/gonced8/.local/lib/python3.6/site-packages/tensorflow_estimator/python/estimator/estimator.py", line 1124, in _train_model
+    return self._train_model_default(input_fn, hooks, saving_listeners)
+  File "/home/gonced8/.local/lib/python3.6/site-packages/tensorflow_estimator/python/estimator/estimator.py", line 1158, in _train_model_default
+    saving_listeners)
+  File "/home/gonced8/.local/lib/python3.6/site-packages/tensorflow_estimator/python/estimator/estimator.py", line 1407, in _train_with_estimator_spec
+    _, loss = mon_sess.run([estimator_spec.train_op, estimator_spec.loss])
+  File "/home/gonced8/.local/lib/python3.6/site-packages/tensorflow/python/training/monitored_session.py", line 676, in run
+    run_metadata=run_metadata)
+  File "/home/gonced8/.local/lib/python3.6/site-packages/tensorflow/python/training/monitored_session.py", line 1171, in run
+    run_metadata=run_metadata)
+  File "/home/gonced8/.local/lib/python3.6/site-packages/tensorflow/python/training/monitored_session.py", line 1270, in run
+    raise six.reraise(*original_exc_info)
+  File "/home/gonced8/.local/lib/python3.6/site-packages/six.py", line 693, in reraise
+    raise value
+  File "/home/gonced8/.local/lib/python3.6/site-packages/tensorflow/python/training/monitored_session.py", line 1255, in run
+    return self._sess.run(*args, **kwargs)
+  File "/home/gonced8/.local/lib/python3.6/site-packages/tensorflow/python/training/monitored_session.py", line 1335, in run
+    run_metadata=run_metadata))
+  File "/home/gonced8/.local/lib/python3.6/site-packages/tensorflow/python/training/basic_session_run_hooks.py", line 582, in after_run
+    if self._save(run_context.session, global_step):
+  File "/home/gonced8/.local/lib/python3.6/site-packages/tensorflow/python/training/basic_session_run_hooks.py", line 599, in _save
+    self._get_saver().save(session, self._save_path, global_step=step)
+  File "/home/gonced8/.local/lib/python3.6/site-packages/tensorflow/python/training/saver.py", line 1188, in save
+    raise exc
+ValueError: Parent directory of model/run/model.ckpt doesn't exist, can't save.

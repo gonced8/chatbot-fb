@@ -1,0 +1,9 @@
+model_dir: model/run/
+
+data:
+    train_features_file: ./training_sets/train/src-train.txt
+    train_labels_file: ./training_sets/train/tgt-train.txt
+    eval_features_file: ./training_sets/eval/src-val.txt
+    eval_labels_file: ./training_sets/eval/tgt-val.txt
+    source_words_vocabulary: ./vocab/vocab.txt
+    target_words_vocabulary: ./vocab/vocab.txt
